@@ -16,19 +16,16 @@
     },
     "license": "GPL-2.0+",
     "require": {
-        "php": ">=5.4",
-        "nikic/php-parser": "*",
-        "nategood/commando": "*",
-        "mustache/mustache": "*"
+        "php": "^7.2",
+        "nikic/php-parser": "^4",
+        "nategood/commando": "^0.3",
+        "mustache/mustache": "^2.12"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpspec/prophecy": "*"
+        "phpunit/phpunit": "^8",
+        "phpspec/prophecy": "^1.8"
     },
     "bin": [
         "src/testability"
-    ],
-    "config": {
-        "bin-dir": "bin"
-    }
+    ]
 }
