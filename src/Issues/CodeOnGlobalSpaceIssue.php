@@ -5,13 +5,13 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class CodeOnGlobalSpaceIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Code on global space";
-	}
+    public function getTitle()
+    {
+        return "Code on global space";
+    }
 
-	public function getID()
-	{
-		return '';
-	}
+    public function getID()
+    {
+        return '';
+    }
 }

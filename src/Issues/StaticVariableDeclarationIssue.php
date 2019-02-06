@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class StaticVariableDeclarationIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Static variable declaration";
-	}
+    public function getTitle()
+    {
+        return "Static variable declaration";
+    }
 }

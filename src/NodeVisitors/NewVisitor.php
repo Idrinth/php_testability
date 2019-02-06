@@ -15,40 +15,35 @@ class NewVisitor extends VisitorAbstract
 {
     private $insideThrow = false;
 
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
         // mute inside throw statements
-        if ($node instanceof Stmt\Throw_) 
-        {
+        if ($node instanceof Stmt\Throw_) {
             $this->insideThrow = true;
         }
     }
 
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
         // check for "new" statements
-        if ($node instanceof Expr\New_ && !$this->inGlobalScope() && !$this->insideThrow) 
-        {
-            $parentClass = $this->stack->findContextOfType(new CollectionSpecification);
+        if ($node instanceof Expr\New_ && !$this->inGlobalScope() && !$this->insideThrow) {
+            $parentClass = $this->stack->findContextOfType(new CollectionSpecification());
 
-            if ($parentClass === false || stripos($parentClass->getName(), 'Factory') === FALSE) // do not report for factories
-            {
-                $dictionary = new Dictionary;
+            if ($parentClass === false || stripos($parentClass->getName(), 'Factory') === false) { // do not report for factories
+                $dictionary = new Dictionary();
 
-                $obj = new NodeWrapper ($node);
+                $obj = new NodeWrapper($node);
 
                 // only report internal php classes if not safe for
                 // instantiation (ie: with external resources)
-                if (!$dictionary->isClassSafeForInstantiation($obj->getName()))
-                {
-                    $this->stack->addIssue (new NewInstanceIssue($node));
+                if (!$dictionary->isClassSafeForInstantiation($obj->getName())) {
+                    $this->stack->addIssue(new NewInstanceIssue($node));
                 }
             }
         }
 
         // unmute
-        elseif ($node instanceof Stmt\Throw_) 
-        {
+        elseif ($node instanceof Stmt\Throw_) {
             $this->insideThrow = false;
         }
     }

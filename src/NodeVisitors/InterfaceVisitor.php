@@ -7,10 +7,9 @@ use PhpParser\Node\Stmt;
 
 class InterfaceVisitor extends VisitorAbstract
 {
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\Interface_) 
-        {
+        if ($node instanceof Stmt\Interface_) {
             return PhpParser\NodeTraverser::DONT_TRAVERSE_CHILDREN;
         }
     }

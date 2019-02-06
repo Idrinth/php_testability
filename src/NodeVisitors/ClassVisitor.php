@@ -10,39 +10,35 @@ use PhpParser\Node\Stmt;
 
 class ClassVisitor extends VisitorAbstract
 {
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
-        if ($this->isClass($node)) 
-        {
+        if ($this->isClass($node)) {
             // create new context, keep parent
-            $this->stack->start (new ClassContext ($node->name, $node->getLine(), $node->getAttribute('endLine')));
+            $this->stack->start(new ClassContext($node->name, $node->getLine(), $node->getAttribute('endLine')));
 
             // report final class
-            if ($node instanceof Stmt\Class_ && $node->isFinal()) 
-            {
-                $this->stack->addIssue (new FinalClassIssue($node));
+            if ($node instanceof Stmt\Class_ && $node->isFinal()) {
+                $this->stack->addIssue(new FinalClassIssue($node));
             }
 
-            if (!empty($node->extends))
-            {
-                $this->stack->addIssue (new ExtendedClassIssue($node));
+            if (!empty($node->extends)) {
+                $this->stack->addIssue(new ExtendedClassIssue($node));
             }
         }
     }
 
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($this->isClass($node)) 
-        {
+        if ($this->isClass($node)) {
             // back to the previous context
             $this->stack->end();
         }
     }
 
-    public function isClass ($node)
+    public function isClass($node)
     {
         return (
-            $node instanceof Stmt\Class_ || 
+            $node instanceof Stmt\Class_ ||
             $node instanceof Stmt\Trait_
         );
     }

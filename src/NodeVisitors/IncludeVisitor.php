@@ -9,15 +9,13 @@ use PhpParser\Node\Expr;
 
 class IncludeVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Expr\Include_ && !$this->inGlobalScope()) 
-        {
-            $parentClass = $this->stack->findContextOfType(new ProcedureSpecification);
+        if ($node instanceof Expr\Include_ && !$this->inGlobalScope()) {
+            $parentClass = $this->stack->findContextOfType(new ProcedureSpecification());
 
-            if ($parentClass->getName() !== '__autoload') 
-            {
-                $this->stack->addIssue (new IncludeIssue($node));
+            if ($parentClass->getName() !== '__autoload') {
+                $this->stack->addIssue(new IncludeIssue($node));
             }
         }
     }

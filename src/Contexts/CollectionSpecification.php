@@ -8,11 +8,11 @@ use edsonmedina\php_testability\Contexts\TraitContext;
 
 class CollectionSpecification implements ContextSpecificationInterface
 {
-	public function isSatisfiedBy (ContextInterface $subject)
-	{
-		return (
-			$subject instanceof ClassContext 
-			|| $subject instanceof TraitContext
-		);
-	}
+    public function isSatisfiedBy(ContextInterface $subject)
+    {
+        return (
+            $subject instanceof ClassContext
+            || $subject instanceof TraitContext
+        );
+    }
 }

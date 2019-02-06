@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class ExternalClassConstantFetchIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "External class constant fetch";
-	}
+    public function getTitle()
+    {
+        return "External class constant fetch";
+    }
 }

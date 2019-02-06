@@ -27,17 +27,18 @@ jobs:
       install: true
       script:
         - ../tools/vendor/bin/parallel-lint --exclude vendor .
+
     - stage: Test
       php: 7.3
       name: PHP 7.3
       before_install:
-        - mkdir ../tools && composer init --name=putg/tools --working-dir=../tools
-        - composer require codacy/coverage:dev-master --working-dir=../tools
+        #- mkdir ../tools && composer init --name=putg/tools --working-dir=../tools
+        #- composer require codacy/coverage:dev-master --working-dir=../tools
       install:
         - composer update
       script:
         - vendor/bin/phpunit --testdox --coverage-text --coverage-clover build/logs/clover.xml --whitelist src/ tests/
-        - ../tools/vendor/bin/codacycoverage clover build/logs/clover.xml
+        #- ../tools/vendor/bin/codacycoverage clover build/logs/clover.xml
     - stage: Test
       php: 7.2
       name: PHP 7.2
@@ -49,16 +50,17 @@ jobs:
       script:
         - vendor/bin/phpunit --testdox --coverage-text --coverage-clover build/logs/clover.xml --whitelist src/ tests/
         #- ../tools/vendor/bin/codacycoverage clover build/logs/clover.xml
+
     - stage: Static Code Analysis
       php: 7.3
-      name: "PHP Codesniffer: PSR2"
+      name: "PHP Codesniffer: PSR12"
       before_install:
         - phpenv config-rm xdebug.ini || true
         - mkdir ../tools && composer init --name=putg/tools --working-dir=../tools
-        - composer require squizlabs/php_codesniffer:^3.2.2 --working-dir=../tools
+        - composer require squizlabs/php_codesniffer:^3.4 --working-dir=../tools
       install: true
       script:
-        - ../tools/vendor/bin/phpcs -p --standard=PSR2 src tests bin
+        - ../tools/vendor/bin/phpcs -p --standard=PSR12 src tests bin
     - stage: Static Code Analysis
       php: 7.3
       name: Composer Require Checker

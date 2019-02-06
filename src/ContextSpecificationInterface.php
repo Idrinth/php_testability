@@ -5,5 +5,5 @@ use edsonmedina\php_testability\ContextInterface;
 
 interface ContextSpecificationInterface
 {
-	public function isSatisfiedBy (ContextInterface $subject);
+    public function isSatisfiedBy(ContextInterface $subject);
 }

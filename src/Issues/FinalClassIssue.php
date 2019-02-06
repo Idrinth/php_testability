@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class FinalClassIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Final class declaration";
-	}
+    public function getTitle()
+    {
+        return "Final class declaration";
+    }
 }

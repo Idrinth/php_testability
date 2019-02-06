@@ -1,6 +1,6 @@
 <?php
 
-error_reporting (E_ALL);
+error_reporting(E_ALL);
 
 /**
  * This is a test file, with several issues that
@@ -8,22 +8,22 @@ error_reporting (E_ALL);
  */
 final class Whatever
 {
-    public function methodMan ($x, $y, $z)
+    public function methodMan($x, $y, $z)
     {
         // globals, over multiple lines
         global $boom,
-        	   $bass;
+               $bass;
 
         // this variable can't be relied
         static $cache, $cache2;
 
         // new instances
-       	$x  = new StdClass(); // should be fine
-        $dt = new DateTime (); // should be fine
+        $x  = new StdClass(); // should be fine
+        $dt = new DateTime(); // should be fine
         $db = new PDO(); // should be reported
 
         // Static property of another class
-       	$a = OtherClass::thing;
+        $a = OtherClass::thing;
 
         // Static property, same class
         $a = Whatever::thing;
@@ -42,30 +42,30 @@ final class Whatever
         $test['thing']::do_it();
 
         $double = function ($y) {
-            return $y*2;
+            return $y * 2;
         };
 
         // Static method call, same class
         self::methodMan();
 
         // static method call, whitelisted class
-        $x = DateTime::createFromFormat ($x, time());
+        $x = DateTime::createFromFormat($x, time());
 
 
         // Parent class method call
         parent::methodMan();
 
         // Static constant from same class
-       	$b = Whatever::notThisOne;
+        $b = Whatever::notThisOne;
 
 
         // includes are dangerous
-        include $dir.'dangerousFile.php';
+        include $dir . 'dangerousFile.php';
         include_once 'dangerousFile2.php';
-        include_once __DIR__.'/dangerousFile3.php';
+        include_once __DIR__ . '/dangerousFile3.php';
 
         // Callables (should be supported in the future)
-        array_map ('Blah::something', array(1,2,3));
+        array_map('Blah::something', array(1,2,3));
 
         // Static dynamic method call, another class
         $y = Utils::$name;
@@ -81,22 +81,22 @@ final class Whatever
         die('fff');
     }
 
-    function __set ($name, $val)
+    function __set($name, $val)
     {
         $this->values[$name] = $val;
     }
 
-    private function privateParts ()
+    private function privateParts()
     {
         // this method is untestable
     }
 
-    protected function privateParts2 ()
+    protected function privateParts2()
     {
         // this one too
     }
 
-    final public function finalSucks ()
+    final public function finalSucks()
     {
         // this function is not mockable
     }
@@ -104,10 +104,10 @@ final class Whatever
     /**
      * @codeCoverageIgnore
      */
-    private function immune ()
+    private function immune()
     {
         global $y;
-        $x = new Whatever (Things::thing);
+        $x = new Whatever(Things::thing);
         doThisGlobalThing();
     }
 }
@@ -118,7 +118,7 @@ function dothis()
 {
     global $diddy;
 
-    $y = new Whatever ();
+    $y = new Whatever();
     $y->methodMan();
 
     // super global references
@@ -135,11 +135,10 @@ function dothis()
 
     $varClass::method1();
 
-    try
-    {
+    try {
         callThisFunc();
+    } catch (Exception $e) {
     }
-    catch (Exception $e) {}
 
     Stuff::dependency();
 }
@@ -155,10 +154,10 @@ $y = $_GET['y'];
 
 $BLAH = 'ugly';
 
-function __autoload ($xxx)
+function __autoload($xxx)
 {
     // require should not be reported on __autoload
-    require_once 'src/'.$xxx;
+    require_once 'src/' . $xxx;
 }
 
 class ThingFactory

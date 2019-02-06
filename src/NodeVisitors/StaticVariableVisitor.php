@@ -8,11 +8,10 @@ use PhpParser\Node\Stmt;
 
 class StaticVariableVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\Static_) 
-        {
-            $this->stack->addIssue (new StaticVariableDeclarationIssue($node));
+        if ($node instanceof Stmt\Static_) {
+            $this->stack->addIssue(new StaticVariableDeclarationIssue($node));
         }
     }
 }

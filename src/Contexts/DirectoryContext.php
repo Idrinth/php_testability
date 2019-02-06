@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractContext;
 
 class DirectoryContext extends AbstractContext
 {
-	public function __construct ($path)
-	{
-		$this->name = $path;
-	}
+    public function __construct($path)
+    {
+        $this->name = $path;
+    }
 }

@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class NewInstanceIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "New instance";
-	}
+    public function getTitle()
+    {
+        return "New instance";
+    }
 }

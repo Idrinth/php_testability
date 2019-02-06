@@ -11,35 +11,29 @@ use PhpParser\Node\Stmt;
 
 class MethodVisitor extends VisitorAbstract
 {
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\ClassMethod) 
-        {
+        if ($node instanceof Stmt\ClassMethod) {
             // create new context, keep parent
-            $this->stack->start (new MethodContext ($node->name, $node->getLine(), $node->getAttribute('endLine')));
+            $this->stack->start(new MethodContext($node->name, $node->getLine(), $node->getAttribute('endLine')));
 
             // report non public methods
-            if ($node->isPrivate()) 
-            {
-                $this->stack->addIssue (new PrivateMethodIssue($node));
-            }
-            elseif ($node->isProtected()) 
-            {
-                $this->stack->addIssue (new ProtectedMethodIssue($node));
+            if ($node->isPrivate()) {
+                $this->stack->addIssue(new PrivateMethodIssue($node));
+            } elseif ($node->isProtected()) {
+                $this->stack->addIssue(new ProtectedMethodIssue($node));
             }
 
             // report final methods
-            if ($node->isFinal()) 
-            {
-                $this->stack->addIssue (new FinalMethodIssue($node));
+            if ($node->isFinal()) {
+                $this->stack->addIssue(new FinalMethodIssue($node));
             }
         }
     }
 
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\ClassMethod) 
-        {
+        if ($node instanceof Stmt\ClassMethod) {
             // back to the previous context
             $this->stack->end();
         }

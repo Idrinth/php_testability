@@ -10,22 +10,21 @@ use PhpParser\Node\Expr;
 
 class GlobalFunctionCallVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
         // check for global function calls
-        if ($node instanceof Expr\FuncCall && !$this->inGlobalScope()) 
-        {
-            $dictionary = new Dictionary;
+        if ($node instanceof Expr\FuncCall && !$this->inGlobalScope()) {
+            $dictionary = new Dictionary();
 
-            $obj = new NodeWrapper ($node);
+            $obj = new NodeWrapper($node);
             $functionName = $obj->getName();
 
             // skip internal php functions
-            if ($dictionary->isInternalFunction ($functionName)) {
+            if ($dictionary->isInternalFunction($functionName)) {
                 return;
             }
 
-            $this->stack->addIssue (new GlobalFunctionCallIssue($node));
+            $this->stack->addIssue(new GlobalFunctionCallIssue($node));
         }
     }
 }

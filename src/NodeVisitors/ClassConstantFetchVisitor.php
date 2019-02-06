@@ -10,26 +10,21 @@ use PhpParser\Node\Expr;
 
 class ClassConstantFetchVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Expr\ClassConstFetch && !$this->inGlobalScope())
-        {
-            $parentClass = $this->stack->findContextOfType(new CollectionSpecification);
+        if ($node instanceof Expr\ClassConstFetch && !$this->inGlobalScope()) {
+            $parentClass = $this->stack->findContextOfType(new CollectionSpecification());
 
-            $obj = new NodeWrapper ($node);
+            $obj = new NodeWrapper($node);
             
             // check for class constant fetch from different
             // class (ie: OtherClass::property)
-            if ($parentClass !== false)
-            {
-                if (!$obj->isSameClassAs($parentClass->getName()))
-                {
-                    $this->stack->addIssue (new ExternalClassConstantFetchIssue($node));
-                } 
-            }
-            else
-            {
-                $this->stack->addIssue (new ExternalClassConstantFetchIssue($node));
+            if ($parentClass !== false) {
+                if (!$obj->isSameClassAs($parentClass->getName())) {
+                    $this->stack->addIssue(new ExternalClassConstantFetchIssue($node));
+                }
+            } else {
+                $this->stack->addIssue(new ExternalClassConstantFetchIssue($node));
             }
         }
     }

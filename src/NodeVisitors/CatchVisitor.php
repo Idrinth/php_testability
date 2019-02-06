@@ -8,16 +8,13 @@ use PhpParser\Node\Stmt;
 
 class CatchVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
         // check for empty catch statements
-        if ($node instanceof Stmt\Catch_)
-        {
-            if (!$this->inGlobalScope())
-            {
-                if (empty($node->stmts))
-                {
-                    $this->stack->addIssue (new EmptyCatchIssue ($node));
+        if ($node instanceof Stmt\Catch_) {
+            if (!$this->inGlobalScope()) {
+                if (empty($node->stmts)) {
+                    $this->stack->addIssue(new EmptyCatchIssue($node));
                 }
             }
         }

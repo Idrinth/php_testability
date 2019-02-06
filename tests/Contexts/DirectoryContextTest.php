@@ -1,18 +1,18 @@
 <?php
 
-require_once __DIR__.'/../../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use edsonmedina\php_testability\Contexts\DirectoryContext;
 
 class DirectoryContextTest extends PHPUnit\Framework\TestCase
 {
-	/**
-	 * @covers \edsonmedina\php_testability\Contexts\DirectoryContext::__construct
-	 */
-	public function testConstructor ()
-	{
-		$context = new DirectoryContext ('foo');
+    /**
+     * @covers \edsonmedina\php_testability\Contexts\DirectoryContext::__construct
+     */
+    public function testConstructor()
+    {
+        $context = new DirectoryContext('foo');
 
-		$this->assertEquals ('foo', $context->getName());
-	}
+        $this->assertEquals('foo', $context->getName());
+    }
 }

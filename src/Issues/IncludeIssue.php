@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class IncludeIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Include";
-	}
+    public function getTitle()
+    {
+        return "Include";
+    }
 }

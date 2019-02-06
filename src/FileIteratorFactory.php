@@ -1,6 +1,6 @@
 <?php
 /**
- * FileIterator 
+ * FileIterator
  * This class deals with file iteration
  * @author Edson Medina <edsonmedina@gmail.com>
  */
@@ -13,11 +13,11 @@ namespace edsonmedina\php_testability;
  * @Factory
  * @author Edson Medina <edsonmedina@gmail.com>
  */
-class FileIteratorFactory 
+class FileIteratorFactory
 {
-	public function create ($verbose = false)
-	{
-		$analyserFactory = new AnalyserFactory;
-		return new FileIterator ($analyserFactory->create (), $verbose);
-	}
+    public function create($verbose = false)
+    {
+        $analyserFactory = new AnalyserFactory();
+        return new FileIterator($analyserFactory->create(), $verbose);
+    }
 }

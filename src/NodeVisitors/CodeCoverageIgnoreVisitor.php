@@ -6,10 +6,9 @@ use PhpParser;
 
 class CodeCoverageIgnoreVisitor extends VisitorAbstract
 {
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
-        if (stripos ($node->getDocComment(), '@codeCoverageIgnore') !== FALSE)
-        {
+        if (stripos($node->getDocComment(), '@codeCoverageIgnore') !== false) {
             return PhpParser\NodeTraverser::DONT_TRAVERSE_CHILDREN;
         }
     }

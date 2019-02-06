@@ -8,12 +8,11 @@ use PhpParser\Node\Expr;
 
 class ExitVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
         // check for exit/die statements
-        if ($node instanceof Expr\Exit_ && !$this->inGlobalScope()) 
-        {
-            $this->stack->addIssue (new ExitIssue($node));
+        if ($node instanceof Expr\Exit_ && !$this->inGlobalScope()) {
+            $this->stack->addIssue(new ExitIssue($node));
         }
     }
 }

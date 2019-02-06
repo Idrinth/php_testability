@@ -7,117 +7,97 @@ use PhpParser\Node\Expr;
 
 class NodeWrapper
 {
-	private $node;
-	public  $line;
-	public  $endLine;
+    private $node;
+    public $line;
+    public $endLine;
 
-	public function __construct (PhpParser\Node $node) 
-	{
-		$this->node    = $node;
-		$this->line    = $node->getLine();
-		$this->endLine = $node->getAttribute('endLine');
-	}
+    public function __construct(PhpParser\Node $node)
+    {
+        $this->node    = $node;
+        $this->line    = $node->getLine();
+        $this->endLine = $node->getAttribute('endLine');
+    }
 
-	public function getName() 
-	{	
-		$name      = '';
-		$separator = '';
+    public function getName()
+    {
+        $name      = '';
+        $separator = '';
 
-		// deal with list of variable names
-		if (isset($this->node->vars))
-		{
-			$names = [];
-			foreach ($this->node->vars as $var) 
-			{
-				if ($var instanceof Expr\ArrayDimFetch)
-				{
-					$names[] = '$'.$this->getArrayDimFetchName ($var);
-				}
-				else
-				{
-				    if ($var->name instanceof Expr\Variable)
-                    {
-                        $names[] = '$'.$var->name->name;
+        // deal with list of variable names
+        if (isset($this->node->vars)) {
+            $names = [];
+            foreach ($this->node->vars as $var) {
+                if ($var instanceof Expr\ArrayDimFetch) {
+                    $names[] = '$' . $this->getArrayDimFetchName($var);
+                } else {
+                    if ($var->name instanceof Expr\Variable) {
+                        $names[] = '$' . $var->name->name;
                     } else {
-                        $names[] = '$'.$var->name;
+                        $names[] = '$' . $var->name;
                     }
-				}
-			}
-
-			return join (', ', $names);
-		}
-
-		if (isset($this->node->class)) 
-		{
-			if (isset($this->node->class->parts)) {
-				$name .= $this->node->class->toString ('\\');
-			} else {
-				$name .= '<variable>';
-			}
-
-			$separator = '::';
-		}
-
-		if (isset($this->node->name))
-		{
-			if ($this->node->name instanceof Expr\Variable) 
-			{
-				$nodeName = $this->node->getAttribute('name');
-				$name .= $separator. (!empty($nodeName) ? $nodeName : '<variable>');
-			} 
-			elseif ($this->node->name instanceof Expr\ArrayDimFetch) 
-			{
-				$name .= $separator.'<variable>';	
-			} 
-			else
-			{
-				$name .= $separator . $this->node->name;
-			}
-		}
-		elseif (isset($this->node->var->name))
-		{
-			if ($this->node->var->name instanceof Expr\Variable)
-			{
-				$name .= $separator.'$'.$this->node->var->name->name;
+                }
             }
-            elseif ($this->node->var->name instanceof Expr\ArrayDimFetch)
-            {
-                $name .= $separator.'$'.$this->getArrayDimFetchName($this->node->var->name);
-            }
-			else
-			{
-				$name .= $separator.'$'.$this->node->var->name;
-			}
-		}
-	
-		return $name;
-	}
 
-	public function getArrayDimFetchName ($node)
-	{
-	    if (isset($node->var)) {
-    	    return $this->getArrayDimFetchName($node->var);
-    	}
-
-    	if (isset($node->name) && $node->name instanceof Expr\ArrayDimFetch) {
-	        return $this->getArrayDimFetchName($node->name);
+            return join(', ', $names);
         }
 
-    	return $node->name;
-	}
+        if (isset($this->node->class)) {
+            if (isset($this->node->class->parts)) {
+                $name .= $this->node->class->toString('\\');
+            } else {
+                $name .= '<variable>';
+            }
 
-	public function isSameClassAs ($classname) 
-	{
-		if (empty($this->node->class->parts)) {
-			return false;
-		}
+            $separator = '::';
+        }
 
-		$name = end($this->node->class->parts);
-		return ($name === $classname || $name === 'self');
-	}
+        if (isset($this->node->name)) {
+            if ($this->node->name instanceof Expr\Variable) {
+                $nodeName = $this->node->getAttribute('name');
+                $name .= $separator . (!empty($nodeName) ? $nodeName : '<variable>');
+            } elseif ($this->node->name instanceof Expr\ArrayDimFetch) {
+                $name .= $separator . '<variable>';
+            } else {
+                $name .= $separator . $this->node->name;
+            }
+        } elseif (isset($this->node->var->name)) {
+            if ($this->node->var->name instanceof Expr\Variable) {
+                $name .= $separator . '$' . $this->node->var->name->name;
+            } elseif ($this->node->var->name instanceof Expr\ArrayDimFetch) {
+                $name .= $separator . '$' . $this->getArrayDimFetchName($this->node->var->name);
+            } else {
+                $name .= $separator . '$' . $this->node->var->name;
+            }
+        }
+    
+        return $name;
+    }
 
-	public function hasChildren() 
-	{
-		return !empty($this->node->stmts);
-	}
+    public function getArrayDimFetchName($node)
+    {
+        if (isset($node->var)) {
+            return $this->getArrayDimFetchName($node->var);
+        }
+
+        if (isset($node->name) && $node->name instanceof Expr\ArrayDimFetch) {
+            return $this->getArrayDimFetchName($node->name);
+        }
+
+        return $node->name;
+    }
+
+    public function isSameClassAs($classname)
+    {
+        if (empty($this->node->class->parts)) {
+            return false;
+        }
+
+        $name = end($this->node->class->parts);
+        return ($name === $classname || $name === 'self');
+    }
+
+    public function hasChildren()
+    {
+        return !empty($this->node->stmts);
+    }
 }

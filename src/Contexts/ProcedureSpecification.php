@@ -9,12 +9,12 @@ use edsonmedina\php_testability\Contexts\AnonymousFunctionContext;
 
 class ProcedureSpecification implements ContextSpecificationInterface
 {
-	public function isSatisfiedBy (ContextInterface $subject)
-	{
-		return (
-			$subject instanceof MethodContext 
-			|| $subject instanceof FunctionContext
-			|| $subject instanceof AnonymousFunctionContext
-		);
-	}
+    public function isSatisfiedBy(ContextInterface $subject)
+    {
+        return (
+            $subject instanceof MethodContext
+            || $subject instanceof FunctionContext
+            || $subject instanceof AnonymousFunctionContext
+        );
+    }
 }

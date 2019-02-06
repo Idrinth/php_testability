@@ -3,58 +3,58 @@
 use edsonmedina\php_testability\Analyser;
 use edsonmedina\php_testability\FileIterator;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class FileIteratorTest extends PHPUnit\Framework\TestCase
 {
-	/**
-	 * @covers \edsonmedina\php_testability\FileIterator::setExcludedDirs
-	 * @covers \edsonmedina\php_testability\FileIterator::isDirExcluded
-	 */
-	public function testIsDirExcluded ()
-	{
-		$analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
+    /**
+     * @covers \edsonmedina\php_testability\FileIterator::setExcludedDirs
+     * @covers \edsonmedina\php_testability\FileIterator::isDirExcluded
+     */
+    public function testIsDirExcluded()
+    {
+        $analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
 
-		$fileIterator = new FileIterator ($analyser);
-		$fileIterator->setExcludedDirs (['whatever/thirdparty', '', 'other']);
+        $fileIterator = new FileIterator($analyser);
+        $fileIterator->setExcludedDirs(['whatever/thirdparty', '', 'other']);
 
-		$this->assertTrue ($fileIterator->isDirExcluded('bla/whatever/thirdparty'));
-		$this->assertTrue ($fileIterator->isDirExcluded('bla/whatever/other'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/somedir'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/tests'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/.git'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/vendor'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/tmp'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/temp'));
-	}	
+        $this->assertTrue($fileIterator->isDirExcluded('bla/whatever/thirdparty'));
+        $this->assertTrue($fileIterator->isDirExcluded('bla/whatever/other'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/somedir'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/tests'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/.git'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/vendor'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/tmp'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/temp'));
+    }
 
-	/**
-	 * @covers \edsonmedina\php_testability\FileIterator::isDirExcluded
-	 */
-	public function testIsDirExcludedDefaultValues ()
-	{
-		$analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
+    /**
+     * @covers \edsonmedina\php_testability\FileIterator::isDirExcluded
+     */
+    public function testIsDirExcludedDefaultValues()
+    {
+        $analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
 
-		$fileIterator = new FileIterator ($analyser);
+        $fileIterator = new FileIterator($analyser);
 
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/somedir'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/tests'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/.git'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/vendor'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/tmp'));
-		$this->assertFalse ($fileIterator->isDirExcluded('bla/whatever/temp'));
-	}
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/somedir'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/tests'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/.git'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/vendor'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/tmp'));
+        $this->assertFalse($fileIterator->isDirExcluded('bla/whatever/temp'));
+    }
 
-	/**
-	 * @covers \edsonmedina\php_testability\FileIterator::__construct
-	 * @covers \edsonmedina\php_testability\FileIterator::getProcessedFilesCount
-	 */
-	public function testGetProcessedFilesCountAtStart ()
-	{
-		$analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
+    /**
+     * @covers \edsonmedina\php_testability\FileIterator::__construct
+     * @covers \edsonmedina\php_testability\FileIterator::getProcessedFilesCount
+     */
+    public function testGetProcessedFilesCountAtStart()
+    {
+        $analyser = $this->getMockBuilder(Analyser::class)->disableOriginalConstructor()->getMock();
 
-		$fileIterator = new FileIterator ($analyser);
+        $fileIterator = new FileIterator($analyser);
 
-		$this->assertTrue (0 === $fileIterator->getProcessedFilesCount());
-	}	
+        $this->assertTrue(0 === $fileIterator->getProcessedFilesCount());
+    }
 }

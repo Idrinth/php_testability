@@ -10,11 +10,11 @@ use PhpParser\ParserFactory;
 
 class AnalyserFactory
 {
-	public function create ()
-	{
-        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP7);
-		$factory = new AnalyserAbstractFactory;
+    public function create()
+    {
+        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $factory = new AnalyserAbstractFactory();
 
-		return new Analyser ($parser, $factory);
-	}
+        return new Analyser($parser, $factory);
+    }
 }

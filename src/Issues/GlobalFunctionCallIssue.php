@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class GlobalFunctionCallIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Global function call";
-	}
+    public function getTitle()
+    {
+        return "Global function call";
+    }
 }

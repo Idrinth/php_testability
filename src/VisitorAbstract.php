@@ -11,14 +11,14 @@ abstract class VisitorAbstract extends PhpParser\NodeVisitorAbstract
     protected $stack;
     protected $context;
 
-    public function __construct (ContextStack $stack, ContextInterface $context)
+    public function __construct(ContextStack $stack, ContextInterface $context)
     {
         $this->stack    = $stack;
         $this->context  = $context;
     }
 
-    protected function inGlobalScope ()
+    protected function inGlobalScope()
     {
-    	return ($this->stack->current() instanceof FileContext);
+        return ($this->stack->current() instanceof FileContext);
     }
 }

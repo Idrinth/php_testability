@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class StaticPropertyFetchIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Static property fetch";
-	}
+    public function getTitle()
+    {
+        return "Static property fetch";
+    }
 }

@@ -3,13 +3,13 @@ namespace edsonmedina\php_testability;
 
 use PhpParser;
 
-interface IssueInterface 
+interface IssueInterface
 {
-	public function __construct (PhpParser\Node $node);
+    public function __construct(PhpParser\Node $node);
 
-	public function getTitle();
+    public function getTitle();
 
-	public function getID();
+    public function getID();
 
-	public function getLine();
+    public function getLine();
 }

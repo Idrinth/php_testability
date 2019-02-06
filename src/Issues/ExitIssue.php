@@ -5,13 +5,13 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class ExitIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Exit";
-	}
+    public function getTitle()
+    {
+        return "Exit";
+    }
 
-	public function getID()
-	{
-		return '';
-	}
+    public function getID()
+    {
+        return '';
+    }
 }

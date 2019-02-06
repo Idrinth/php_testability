@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class PrivateMethodIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Private method declaration";
-	}
+    public function getTitle()
+    {
+        return "Private method declaration";
+    }
 }

@@ -7,8 +7,8 @@ use edsonmedina\php_testability\Contexts\FileContext;
 
 class FileSpecification implements ContextSpecificationInterface
 {
-	public function isSatisfiedBy (ContextInterface $subject)
-	{
-		return ($subject instanceof FileContext);
-	}
+    public function isSatisfiedBy(ContextInterface $subject)
+    {
+        return ($subject instanceof FileContext);
+    }
 }

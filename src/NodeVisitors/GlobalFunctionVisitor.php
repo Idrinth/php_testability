@@ -8,19 +8,17 @@ use PhpParser\Node\Stmt;
 
 class GlobalFunctionVisitor extends VisitorAbstract
 {
-    public function enterNode (PhpParser\Node $node) 
+    public function enterNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\Function_) 
-        {
+        if ($node instanceof Stmt\Function_) {
             // create new context, keep parent
-            $this->stack->start (new FunctionContext ($node->name, $node->getLine(), $node->getAttribute('endLine')));
+            $this->stack->start(new FunctionContext($node->name, $node->getLine(), $node->getAttribute('endLine')));
         }
     }
 
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Stmt\Function_) 
-        {
+        if ($node instanceof Stmt\Function_) {
             // back to the previous context
             $this->stack->end();
         }

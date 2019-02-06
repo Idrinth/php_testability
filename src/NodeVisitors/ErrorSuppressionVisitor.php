@@ -8,11 +8,10 @@ use PhpParser\Node\Expr;
 
 class ErrorSuppressionVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
-        if ($node instanceof Expr\ErrorSuppress && !$this->inGlobalScope()) 
-        {
-            $this->stack->addIssue (new ErrorSuppressionIssue($node));
+        if ($node instanceof Expr\ErrorSuppress && !$this->inGlobalScope()) {
+            $this->stack->addIssue(new ErrorSuppressionIssue($node));
         }
     }
 }

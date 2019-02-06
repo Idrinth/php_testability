@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class AllTests
 {
@@ -13,19 +13,17 @@ class AllTests
         return $suite;
     }
 
-	private static function addDir ($path, PHPUnit\Framework\TestSuite $suite)
+    private static function addDir($path, PHPUnit\Framework\TestSuite $suite)
     {
-        $dir = new RecursiveIteratorIterator (new RecursiveDirectoryIterator(realpath($path)));
-        foreach ($dir as $file)
-        {
+        $dir = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(realpath($path)));
+        foreach ($dir as $file) {
             // skip dirs
             if ($file->isDir()) {
                 continue;
             }
 
             // skip non-tests
-            if (substr($file, -8) === 'Test.php')
-            {
+            if (substr($file, -8) === 'Test.php') {
                 // remove extension
                 $className = substr($file->getFilename(), 0, -4);
 

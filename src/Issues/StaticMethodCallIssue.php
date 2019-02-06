@@ -5,8 +5,8 @@ use edsonmedina\php_testability\AbstractIssue;
 
 class StaticMethodCallIssue extends AbstractIssue
 {
-	public function getTitle()
-	{
-		return "Static method call";
-	}
+    public function getTitle()
+    {
+        return "Static method call";
+    }
 }

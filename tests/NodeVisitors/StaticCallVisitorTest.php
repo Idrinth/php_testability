@@ -16,7 +16,7 @@ class StaticCallVisitorTest extends PHPUnit\Framework\TestCase
      */
     public function testLeaveNodeWithDifferentType()
     {
-        $context = new RootContext ('/');
+        $context = new RootContext('/');
 
         /** @var ContextStack|PHPUnit_Framework_MockObject $stack */
         $stack = $this->getMockBuilder(ContextStack::class)
@@ -30,7 +30,7 @@ class StaticCallVisitorTest extends PHPUnit\Framework\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $visitor = new StaticCallVisitor ($stack, $context);
+        $visitor = new StaticCallVisitor($stack, $context);
         $visitor->leaveNode($node);
     }
 
@@ -39,7 +39,7 @@ class StaticCallVisitorTest extends PHPUnit\Framework\TestCase
      */
     public function testLeaveNodeInGlobalSpace()
     {
-        $context = new RootContext ('/');
+        $context = new RootContext('/');
 
         $stack = $this->getMockBuilder(ContextStack::class)
             ->setConstructorArgs([$context])
@@ -63,7 +63,7 @@ class StaticCallVisitorTest extends PHPUnit\Framework\TestCase
 
     public function testLeaveNodeWithParentCall()
     {
-        $context = new RootContext ('/');
+        $context = new RootContext('/');
 
         $stack = $this->getMockBuilder(ContextStack::class)
             ->setConstructorArgs([$context])

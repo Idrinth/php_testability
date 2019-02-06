@@ -8,12 +8,11 @@ use PhpParser\Node\Stmt;
 
 class GlobalVarVisitor extends VisitorAbstract
 {
-    public function leaveNode (PhpParser\Node $node) 
+    public function leaveNode(PhpParser\Node $node)
     {
         // check for global variables
-        if ($node instanceof Stmt\Global_ && !$this->inGlobalScope()) 
-        {
-            $this->stack->addIssue (new GlobalVariableIssue($node));
+        if ($node instanceof Stmt\Global_ && !$this->inGlobalScope()) {
+            $this->stack->addIssue(new GlobalVariableIssue($node));
         }
     }
 }

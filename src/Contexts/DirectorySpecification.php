@@ -7,8 +7,8 @@ use edsonmedina\php_testability\Contexts\DirectoryContext;
 
 class DirectorySpecification implements ContextSpecificationInterface
 {
-	public function isSatisfiedBy (ContextInterface $subject)
-	{
-		return ($subject instanceof DirectoryContext);
-	}
+    public function isSatisfiedBy(ContextInterface $subject)
+    {
+        return ($subject instanceof DirectoryContext);
+    }
 }
